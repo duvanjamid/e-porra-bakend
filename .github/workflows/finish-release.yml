@@ -67,7 +67,7 @@ jobs:
           ref: main
       - name: Set current date as env variable
         run: |
-          DATE=$(date +'%Y-%m-%d_%H%M%S') 
+          DATE=$(date +'%Y%m.%d.%H%M%S') 
           echo "TAG=$DATE"  >> $GITHUB_ENV
       - id: create-tag
         name: create-tag
