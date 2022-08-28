@@ -79,7 +79,7 @@ jobs:
 
   jobMergeReleaseToDesarrollo:
     name: Merge-Release-To-Desarrollo
-    needs: [jobCreateTag, jobRelease]
+    needs: [jobCreateTag]
     runs-on: ubuntu-latest
     steps:
       - id: checkOut
