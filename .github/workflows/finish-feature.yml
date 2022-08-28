@@ -75,4 +75,36 @@ jobs:
         source-branch:  ${{needs.jobMergeDesarrolloToFeature.outputs.rama-feature}}
         target-branch: develop
 
+  jobCreateRelease:
+    name: Create-Release
+    needs: jobMergeFeatureToDesarrollo
+    if: "${{ contains(github.event.head_commit.message, '#RELEASE') }}"
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkOut
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+      - id: create-release
+        name: Create release branch
+        run: |
+          git checkout develop
+          git checkout -b release/new-release
+      - name: Initialize mandatory git config
+        run: |
+          git config user.name "GitHub Actions Automation"
+          git config user.email noreply@github.com
+      - name: Push new branch
+        run: git push origin release/new-release
+      - name: Validar resultado con errores
+        if: ${{ failure() }}
+        env:
+          MENSAJE_ERROR: Fallo la creación del Release
+        run: echo "::set-output name=respuesta-release::${MENSAJE_ERROR}"
+      - name: Validar resultado sin errores
+        if: ${{ success() }}
+        env:
+          MENSAJE_EXITO: Se creo la rama Release release/new-release
+        run: echo "::set-output name=respuesta-release::${MENSAJE_EXITO}"
+
 
