@@ -73,7 +73,7 @@ jobs:
         name: create-tag
         uses: negz/create-tag@v1
         with:
-          version: v${{env.NOW}}
+          version: v${{env.TAG}}
           message: ${{github.event.head_commit.message}}
           token: ${{ secrets.GITHUB_TOKEN }}
 
