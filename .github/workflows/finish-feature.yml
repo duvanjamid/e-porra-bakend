@@ -56,7 +56,7 @@ jobs:
       uses: tukasz/direct-merge-action@master 
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        source-branch: desarrollo
+        source-branch: develop
         target-branch: ${{steps.get-vars.outputs.rama-feature}}
 
     
@@ -73,6 +73,6 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         source-branch:  ${{needs.jobMergeDesarrolloToFeature.outputs.rama-feature}}
-        target-branch: desarrollo
+        target-branch: develop
 
 
