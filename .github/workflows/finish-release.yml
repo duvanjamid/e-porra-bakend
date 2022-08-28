@@ -66,9 +66,9 @@ jobs:
         with:
           ref: main
       - name: Set current date as env variable
-        run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-      - name: Echo current date
-        run: echo $NOW
+        run: |
+          echo "::$(date +'%Y-%m-%dT%H:%M:%S')::$NOW" 
+          echo "TAG=$NOW"  >> $GITHUB_ENV
       - id: create-tag
         name: create-tag
         uses: negz/create-tag@v1
@@ -77,8 +77,8 @@ jobs:
           message: ${{github.event.head_commit.message}}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-  jobMergeReleaseToDesarrollo:
-    name: Merge-Release-To-Desarrollo
+  jobMergeReleaseToDevelop:
+    name: Merge-Release-To-Develop
     needs: [jobCreateTag]
     runs-on: ubuntu-latest
     steps:
