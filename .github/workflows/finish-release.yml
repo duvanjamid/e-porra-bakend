@@ -67,8 +67,8 @@ jobs:
           ref: main
       - name: Set current date as env variable
         run: |
-        echo "::$(date +'%Y-%m-%dT%H:%M:%S')::$NOW" 
-        echo "TAG=$NOW"  >> $GITHUB_ENV
+          echo "::$(date +'%Y-%m-%dT%H:%M:%S')::$NOW" 
+          echo "TAG=$NOW"  >> $GITHUB_ENV
       - id: create-tag
         name: create-tag
         uses: negz/create-tag@v1
